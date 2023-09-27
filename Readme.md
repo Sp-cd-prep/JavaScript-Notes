@@ -1,4 +1,4 @@
-Certainly! Let's start with Day 1 of your JavaScript learning journey. Here are the notes and examples for each of the topics you mentioned:
+### 3. JavaScript Data Types:
 
 ### 1. JavaScript Introduction:
 JavaScript (JS) is a high-level, dynamic, and versatile programming language primarily used for front-end web development. It allows you to add interactivity and dynamic behavior to websites. Here are some key features of JavaScript:
