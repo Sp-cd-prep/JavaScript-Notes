@@ -603,10 +603,24 @@ for(i=0;i<arr.length;i++){
     }
     console.log(arr[i]);
 }
-
-s
 ```
 
+**Reverse the numbers in an array:**
+
+```javascript
+let arr = [1,2,3,4,5]
+let s=0;
+let e=arr.length-1;
+
+while(s<e){
+    let temp = arr[s];
+    arr[s]=arr[e];
+    arr[e]=temp;
+    s++;
+    e--;
+}
+console.log(arr);
+```
 
 **Multidimensional Array:**
 JavaScript arrays can also hold other arrays, creating multidimensional arrays.
@@ -719,4 +733,4 @@ JavaScript provides various methods to manipulate arrays effectively. Here are s
    numbers.reverse(); // [5, 4, 3, 2, 1]
    ```
 
-These array methods are powerful tools for manipulating and working with arrays in JavaScript. They are essential for tasks such as filtering data, transforming data, and modifying arrays to suit your specific needs in programming.
+
