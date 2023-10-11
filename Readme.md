@@ -732,5 +732,14 @@ JavaScript provides various methods to manipulate arrays effectively. Here are s
    let numbers = [1, 2, 3, 4, 5];
    numbers.reverse(); // [5, 4, 3, 2, 1]
    ```
+- **`includes()`**: determines whether an array includes a certain value among its entries, returning true or false as appropriate.
 
-
+  ```javascript
+  const array1 = [1, 2, 3];
+  console.log(array1.includes(2));
+  
+  const pets = ['cat', 'dog', 'bat'];
+  console.log(pets.includes('cat'));
+  console.log(pets.includes('at'));
+// Expected output: false
+  ```
