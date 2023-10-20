@@ -1,3 +1,7 @@
+[JavaScript Math functions](#javaScript-math-functions)
+
+
+
 
 ### 1. JavaScript Introduction:
 JavaScript (JS) is a high-level, dynamic, and versatile programming language primarily used for front-end web development. It allows you to add interactivity and dynamic behavior to websites. Here are some key features of JavaScript:
@@ -763,7 +767,7 @@ output
 ```javascript
 let sum = 0
  for (let i = 0; i < matrix.length; i++) {
-    for (let j = 0; j < matrix[i].length; j++) {
+    for (let j = 0; j < matrix[i].length; j++){
         sum=sum+matrix[i][j]
     }
 }
