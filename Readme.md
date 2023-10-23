@@ -1144,3 +1144,340 @@ let sentence = "I,am,a,comma,separated,sentence";
 let words = sentence.split(","); // ["I", "am", "a", "comma", "separated", "sentence"]
 ```
 
+
+
+
+## JavaScript Objects
+
+### Definition
+
+- **Objects** are one of the fundamental data structures in JavaScript.
+- They are collections of **key-value pairs** where each key is a **string** (or a **symbol**) and each value can be of any data type, including other objects.
+
+### Syntax
+
+- Objects are defined using **curly braces `{}`**.
+- Key-value pairs are separated by **colons**, and pairs are separated by **commas**.
+
+**Example:**
+```javascript
+let person = {
+    name: "John",
+    age: 30,
+    isStudent: false,
+};
+```
+
+### Why Use Objects
+
+1. **Structure and Organization**: Objects allow you to group related data and functions together, providing a way to structure your code.
+
+2. **Easy Access**: You can access properties and methods using their names (keys), making it easy to retrieve or modify data.
+
+3. **Flexibility**: Objects can store data of different types and can be modified dynamically, making them versatile for various use cases.
+
+### Key Concepts
+
+1. **Properties**: Keys in an object are called **properties**, and their corresponding values can be of any data type.
+
+2. **Methods**: Functions within an object are known as **methods**. They allow objects to encapsulate behavior.
+
+3. **Accessing Properties and Methods**: Use dot notation (`object.property`) or bracket notation (`object['property']`) to access object members.
+
+**Example:**
+```javascript
+let person = {
+    name: "John",
+    age: 30,
+    greet: function() {
+        return `Hello, my name is ${this.name}.`;
+    },
+};
+
+console.log(person.name);        // "John"
+console.log(person.greet());     // "Hello, my name is John."
+```
+
+### Where to Use Objects
+
+1. **Modeling Real-World Entities**: Objects are suitable for modeling real-world entities, like users, products, or vehicles, where you can represent properties and actions.
+
+2. **Configuration**: Objects are used to store configuration settings for applications.
+
+3. **Data Structures**: Objects are often used as data structures for organizing, storing, and retrieving data efficiently.
+
+### Object Creation
+
+1. **Object Literals**: The most common way to create an object is by defining it using object literals, as shown in the syntax example.
+
+2. **Using the `new` Operator**: You can create objects from constructor functions using the `new` operator.
+
+3. **Object.create()**: You can create objects with a specific prototype using the `Object.create()` method.
+
+### Object Methods
+
+1. **Adding Methods**: You can add methods to an object by assigning function expressions to its properties.
+
+2. **this Keyword**: The `this` keyword refers to the object itself and is often used to access its own properties and methods.
+
+### Object Properties
+
+1. **Accessing Properties**: Use dot notation (`object.property`) or bracket notation (`object['property']`) to access object properties.
+
+2. **Adding and Modifying Properties**: You can add or modify properties by simply assigning values to them.
+
+3. **Deleting Properties**: The `delete` keyword can be used to remove properties from an object.
+
+### Object Iteration
+
+1. **for...in Loop**: You can use a `for...in` loop to iterate over an object's properties and perform actions on them.
+
+**Example:**
+```javascript
+for (let key in person) {
+    console.log(key, person[key]);
+}
+```
+
+### Summary
+
+- Objects are a fundamental data structure in JavaScript.
+- They are used to group related data and functions together for better organization and ease of access.
+- Objects are versatile and flexible, making them suitable for a wide range of use cases.
+
+
+Certainly! JavaScript objects come with several built-in methods for various operations. Here's an explanation of some of the most commonly used object methods with examples:
+
+### 1. `Object.keys(obj)`
+
+- **Description:** Returns an array containing the object's own enumerable property names (keys).
+
+**Example:**
+```javascript
+const person = {
+    name: "Alice",
+    age: 28,
+    job: "Engineer"
+};
+
+const keys = Object.keys(person);
+console.log(keys); // ["name", "age", "job"]
+```
+
+### 2. `Object.values(obj)`
+
+- **Description:** Returns an array containing the object's own enumerable property values.
+
+**Example:**
+```javascript
+const person = {
+    name: "Bob",
+    age: 35,
+    job: "Designer"
+};
+
+const values = Object.values(person);
+console.log(values); // ["Bob", 35, "Designer"]
+```
+
+### 3. `Object.entries(obj)`
+
+- **Description:** Returns an array of the object's own enumerable property key-value pairs as arrays.
+
+**Example:**
+```javascript
+const person = {
+    name: "Carol",
+    age: 42,
+    job: "Teacher"
+};
+
+const entries = Object.entries(person);
+console.log(entries);
+// [
+//     ["name", "Carol"],
+//     ["age", 42],
+//     ["job", "Teacher"]
+// ]
+```
+
+### 4. `Object.assign(target, source1, source2, ...)`
+
+- **Description:** Copies the values of all enumerable own properties of one or more source objects to a target object. It returns the modified target object.
+
+**Example:**
+```javascript
+const target = { a: 1, b: 2 };
+const source = { b: 3, c: 4 };
+
+const merged = Object.assign(target, source);
+console.log(merged); // { a: 1, b: 3, c: 4 }
+```
+
+### 5. `Object.create(proto)`
+
+- **Description:** Creates a new object with the specified prototype object.
+
+**Example:**
+```javascript
+const parent = {
+    greet: function() {
+        console.log("Hello!");
+    }
+};
+
+const child = Object.create(parent);
+child.greet(); // "Hello!"
+```
+
+### 6. `Object.defineProperty(obj, prop, descriptor)`
+
+- **Description:** Adds a new property to an object or modifies an existing property's attributes.
+
+**Example:**
+```javascript
+const person = {};
+
+Object.defineProperty(person, 'name', {
+    value: "David",
+    writable: false
+});
+
+console.log(person.name); // "David"
+person.name = "Eva"; // This assignment will be ignored.
+console.log(person.name); // "David"
+```
+
+### 7. `Object.freeze(obj)`
+
+- **Description:** Freezes an object, preventing new properties from being added, existing properties from being removed, and the values of existing properties from being changed.
+
+**Example:**
+```javascript
+const car = { make: "Toyota", model: "Camry" };
+Object.freeze(car);
+
+car.color = "Blue"; // This property addition is ignored.
+console.log(car.color); // undefined
+```
+
+### 8. `Object.seal(obj)`
+
+- **Description:** Seals an object, preventing new properties from being added and existing properties from being removed.
+
+**Example:**
+```javascript
+const laptop = { brand: "Dell", model: "XPS" };
+Object.seal(laptop);
+
+laptop.price = 1000; // This property addition is ignored.
+delete laptop.model; // This property deletion is ignored.
+console.log(laptop); // { brand: "Dell", model: "XPS" }
+```
+
+These are just a few of the many methods and functionalities provided by JavaScript objects. Objects are powerful data structures that allow you to work with and manipulate data in a flexible and versatile way. Understanding these methods and how to use them is crucial for JavaScript development.
+
+Certainly! Here are some other important methods and functionalities provided by JavaScript objects:
+
+### 9. `Object.getOwnPropertyNames(obj)`
+
+- **Description:** Returns an array containing all the names of an object's own enumerable and non-enumerable properties.
+
+**Example:**
+```javascript
+const person = {
+    name: "Eve",
+    age: 25,
+    [Symbol('id')]: 'unique'
+};
+
+const propertyNames = Object.getOwnPropertyNames(person);
+console.log(propertyNames); // ["name", "age"]
+```
+
+### 10. `Object.getOwnPropertyDescriptor(obj, prop)`
+
+- **Description:** Returns an object describing the property's attributes (configurable, enumerable, value, writable, get, set).
+
+**Example:**
+```javascript
+const person = {
+    name: "Frank",
+    age: 30
+};
+
+const descriptor = Object.getOwnPropertyDescriptor(person, 'name');
+console.log(descriptor);
+// {
+//     value: "Frank",
+//     writable: true,
+//     enumerable: true,
+//     configurable: true
+// }
+```
+
+### 11. `Object.is(obj1, obj2)`
+
+- **Description:** Compares two values for strict equality (e.g., NaN is considered equal to NaN).
+
+**Example:**
+```javascript
+console.log(Object.is(5, 5));     // true
+console.log(Object.is(NaN, NaN)); // true
+console.log(Object.is(0, -0));    // false
+```
+
+
+### 13. `Object.getOwnPropertySymbols(obj)`
+
+- **Description:** Returns an array of an object's own symbol properties.
+
+**Example:**
+```javascript
+const person = {
+    [Symbol('id')]: 'unique',
+    [Symbol('code')]: '12345'
+};
+
+const symbols = Object.getOwnPropertySymbols(person);
+console.log(symbols); // [Symbol(id), Symbol(code)]
+```
+
+### 14. `Object.entries(obj)`
+
+- **Description:** Returns an array of an object's own enumerable property `[key, value]` pairs as arrays.
+
+**Example:**
+```javascript
+const person = {
+    name: "Hannah",
+    age: 40,
+    job: "Engineer"
+};
+
+const entries = Object.entries(person);
+console.log(entries);
+// [
+//     ["name", "Hannah"],
+//     ["age", 40],
+//     ["job", "Engineer"]
+// ]
+```
+
+### 15. `Object.values(obj)`
+
+- **Description:** Returns an array containing an object's own enumerable property values.
+
+**Example:**
+```javascript
+const person = {
+    name: "Isaac",
+    age: 45,
+    job: "Artist"
+};
+
+const values = Object.values(person);
+console.log(values); // ["Isaac", 45, "Artist"]
+```
+
+These additional methods provide various ways to work with objects, access their properties, and retrieve information about those properties. Understanding when and how to use these methods is essential for effective JavaScript programming.
