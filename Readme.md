@@ -1145,8 +1145,6 @@ let words = sentence.split(","); // ["I", "am", "a", "comma", "separated", "sent
 ```
 
 
-
-
 ## JavaScript Objects
 
 ### Definition
@@ -1427,7 +1425,6 @@ console.log(Object.is(NaN, NaN)); // true
 console.log(Object.is(0, -0));    // false
 ```
 
-
 ### 13. `Object.getOwnPropertySymbols(obj)`
 
 - **Description:** Returns an array of an object's own symbol properties.
@@ -1480,4 +1477,105 @@ const values = Object.values(person);
 console.log(values); // ["Isaac", 45, "Artist"]
 ```
 
-These additional methods provide various ways to work with objects, access their properties, and retrieve information about those properties. Understanding when and how to use these methods is essential for effective JavaScript programming.
+
+
+
+## JavaScript Set
+
+### Set Constructor
+
+- **Definition:** A `Set` is a built-in object in JavaScript that allows you to store unique values of any type, whether they are primitive values or object references.
+- **Constructor:** `new Set(iterable)` where `iterable` is an optional iterable object (e.g., an array) that provides the initial values for the set.
+
+### Common Set Methods
+
+1. `add(value)`: Adds a new element with the specified value to the set. It returns the set itself.
+   
+   **Example:**
+   ```javascript
+   const mySet = new Set();
+   mySet.add(1).add(2).add(3);
+   ```
+
+2. `delete(value)`: Removes an element with the specified value from the set. Returns `true` if the element was in the set and `false` otherwise.
+
+   **Example:**
+   ```javascript
+   mySet.delete(2); // Removes 2 from the set
+   ```
+
+3. `has(value)`: Checks whether an element with the specified value exists in the set. Returns `true` if found, `false` if not.
+
+   **Example:**
+   ```javascript
+   mySet.has(3); // Returns true
+   ```
+
+4. `clear()`: Removes all elements from the set.
+
+   **Example:**
+   ```javascript
+   mySet.clear(); // Clears the set
+   ```
+
+5. `size`: Returns the number of elements in the set.
+
+   **Example:**
+   ```javascript
+   const setSize = mySet.size; // Returns the size of the set
+   ```
+
+### JavaScript Map
+
+### Map Constructor
+
+- **Definition:** A `Map` is another built-in object in JavaScript that allows you to store key-value pairs. It can have keys of any data type.
+- **Constructor:** `new Map(iterable)` where `iterable` is an optional iterable object (e.g., an array of key-value pairs) that provides the initial values for the map.
+
+### Common Map Methods
+
+1. `set(key, value)`: Sets the value for the specified key in the map. Returns the map itself.
+
+   **Example:**
+   ```javascript
+   const myMap = new Map();
+   myMap.set("name", "Alice").set("age", 28);
+   ```
+
+2. `get(key)`: Returns the value associated with the specified key, or `undefined` if the key is not found.
+
+   **Example:**
+   ```javascript
+   const name = myMap.get("name"); // Returns "Alice"
+   ```
+
+3. `delete(key)`: Removes the key-value pair with the specified key from the map. Returns `true` if the key was found and removed, `false` otherwise.
+
+   **Example:**
+   ```javascript
+   myMap.delete("age"); // Removes the key "age" and its associated value
+   ```
+
+4. `has(key)`: Checks whether a key exists in the map. Returns `true` if found, `false` if not.
+
+   **Example:**
+   ```javascript
+   myMap.has("name"); // Returns true
+   ```
+
+5. `clear()`: Removes all key-value pairs from the map.
+
+   **Example:**
+   ```javascript
+   myMap.clear(); // Clears the map
+   ```
+
+6. `size`: Returns the number of key-value pairs in the map.
+
+   **Example:**
+   ```javascript
+   const mapSize = myMap.size; // Returns the size of the map
+   ```
+
+
+
