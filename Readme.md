@@ -1,6 +1,3 @@
-[JavaScript Math functions](#javaScript-math-functions)
-
-
 
 
 ### 1. JavaScript Introduction:
@@ -1010,11 +1007,6 @@ console.log(result);
 ```
 
 
-
-
-
-
-
 #### Escape Character
 Because strings must be written within quotes, JavaScript will misunderstand this string:
 
@@ -1025,8 +1017,6 @@ console.log(text);
 ```javascript
 let text = "We are the so-called \"Vikings\" from the north.";
 ```
-
-
 
 ### 2. String Methods
 
@@ -1145,6 +1135,408 @@ let words = sentence.split(","); // ["I", "am", "a", "comma", "separated", "sent
 ```
 
 
+### 1. Different Scopes in JavaScript:
+
+**Definition:** Scope refers to the context in which variables are declared and accessed. In JavaScript, there are two main types of scope:
+
+- **Global Scope:** Variables declared outside of any function or block have a global scope. They can be accessed from any part of the code.
+
+  ```javascript
+  var globalVariable = "I am global";
+
+  function exampleFunction() {
+      console.log(globalVariable); // Accessible inside functions
+  }
+
+  console.log(globalVariable); // Accessible globally
+  ```
+
+- **Local Scope (Function Scope):** Variables declared within a function have local scope. They are only accessible within that function.
+
+  ```javascript
+  function exampleFunction() {
+      var localVariable = "I am local";
+      console.log(localVariable); // Accessible inside the function
+  }
+
+  console.log(localVariable); // Error: localVariable is not defined
+  ```
+
+### 2. Scope Chaining:
+
+**Definition:** Scope chaining refers to the ability of a function to access variables from its own scope, the scope of the function it was declared within, and the global scope.
+
+```javascript
+var globalVar = "I am global";
+
+function outerFunction() {
+    var outerVar = "I am outer";
+
+    function innerFunction() {
+        var innerVar = "I am inner";
+        console.log(innerVar);   // Access innerVar
+        console.log(outerVar);   // Access outerVar
+        console.log(globalVar);  // Access globalVar
+    }
+
+    innerFunction();
+    console.log(innerVar);   // Error: innerVar is not defined
+}
+
+outerFunction();
+console.log(outerVar);   // Error: outerVar is not defined
+```
+
+### 3. Shadowing:
+
+**Definition:** Shadowing occurs when a variable declared within a local scope has the same name as a variable in an outer scope. The inner variable "shadows" the outer one within its scope.
+
+```javascript
+var outerVar = "I am outer";
+
+function exampleFunction() {
+    var innerVar = "I am inner";
+    console.log(innerVar);   // Access innerVar
+    console.log(outerVar);   // Access outerVar from the outer scope
+
+    var outerVar = "I am inner's shadow"; // This shadows the outerVar
+    console.log(outerVar);   // Access the innerVar's shadow
+}
+
+exampleFunction();
+```
+
+Shadowing in JavaScript occurs when a variable declared within a local scope has the same name as a variable in an outer scope, effectively "shadowing" the outer variable within its scope. While shadowing can be a source of confusion and bugs if used carelessly, there are situations where it can be intentionally employed for specific purposes. Here are some use cases for shadowing:
+
+1. **Local Variable Modification:**
+   - Shadowing can be used when you want to modify the value of a variable within a specific scope without affecting the outer variable.
+
+    ```javascript
+    var count = 10;
+
+    function updateCount() {
+        var count = 20; // Shadowing the outer 'count'
+        console.log(count); // Outputs 20
+    }
+
+    updateCount();
+    console.log(count); // Outputs 10 (outer 'count' remains unchanged)
+    ```
+
+   In this case, the inner function has its own `count` variable that shadows the outer `count`, allowing modification within its scope.
+
+2. **Parameter Shadowing:**
+   - Function parameters can shadow variables with the same name in outer scopes. This is a common practice and is not considered problematic.
+
+    ```javascript
+    var x = 5;
+
+    function addX(x) {
+        return x + 10; // 'x' here shadows the outer 'x'
+    }
+
+    console.log(addX(3)); // Outputs 13 (inner 'x' is used as a parameter)
+    ```
+
+3. **Nested Function Definitions:**
+   - When functions are defined within other functions, shadowing can be used to create isolated scopes for variables. This is often seen in closures.
+
+    ```javascript
+    function outerFunction() {
+        var message = "Hello from outer";
+
+        function innerFunction() {
+            var message = "Hello from inner"; // Shadowing 'message' from outer scope
+            console.log(message); // Outputs "Hello from inner"
+        }
+
+        innerFunction();
+        console.log(message); // Outputs "Hello from outer"
+    }
+
+    outerFunction();
+    ```
+
+   In this example, the inner function has its own `message` variable, which shadows the `message` from the outer scope.
+
+4. **Avoiding Global Scope Pollution:**
+   - Shadowing can be used to avoid unintentional pollution of the global scope by reusing variable names within a function, preventing unintended interactions with global variables.
+
+    ```javascript
+    var data = "Global data";
+
+    function processData(data) {
+        // 'data' parameter shadows the global 'data'
+        console.log(data); // Outputs the function parameter
+    }
+
+    processData("Local data");
+    ```
+
+   In this case, the local `data` parameter shadows the global `data`, providing a clear separation between local and global contexts.
+
+
+### 4. Closures:
+
+**Definition:** A closure is a function that has access to variables from its own scope, the scope of the function it was declared within, and the global scope. Closures allow for the preservation of the outer function's state even after the outer function has finished executing.
+
+```javascript
+function outerFunction() {
+    var outerVar = "I am outer";
+
+    function innerFunction() {
+        var innerVar = "I am inner";
+        console.log(outerVar);   // Access outerVar from the outer scope
+        console.log(innerVar);   // Access innerVar
+    }
+
+    return innerFunction; // Return the inner function (closure)
+}
+
+var closure = outerFunction();
+closure(); // Executes innerFunction with access to outerVar and innerVar
+```
+
+In this example, `innerFunction` is returned from `outerFunction` and assigned to `closure`. Even though `outerFunction` has finished executing, `closure` still has access to `outerVar` due to the closure mechanism.
+
+Understanding these concepts is crucial for writing efficient and maintainable JavaScript code.
+
+
+Scope chaining and closures are related concepts in JavaScript, but they are not exactly the same. Let's clarify the difference between them:
+
+### Scope Chaining:
+
+- **Definition:** Scope chaining refers to the process by which a function can access variables not only within its own scope but also in the outer scopes in which it was defined.
+
+- **Mechanism:** When a function is invoked, JavaScript looks for variables in its local scope. If a variable is not found, it looks in the outer (enclosing) scope. This process continues until the variable is found or the global scope is reached.
+
+- **Example:**
+
+  ```javascript
+  var globalVar = "I am global";
+
+  function outerFunction() {
+      var outerVar = "I am outer";
+
+      function innerFunction() {
+          console.log(innerVar);   // Access innerVar
+          console.log(outerVar);   // Access outerVar from the outer scope
+          console.log(globalVar);  // Access globalVar
+      }
+
+      innerFunction();
+  }
+
+  outerFunction();
+  ```
+
+### Closures:
+
+- **Definition:** A closure is a function that "closes over" variables from its outer scope, preserving access to those variables even after the outer function has finished executing.
+
+- **Mechanism:** A closure is created when a function is defined inside another function, and the inner function references variables from the outer function. The inner function maintains a reference to the outer function's variables, creating a closure.
+
+- **Example:**
+
+  ```javascript
+  function outerFunction() {
+      var outerVar = "I am outer";
+
+      function innerFunction() {
+          console.log(outerVar);  // Access outerVar from the closure
+      }
+
+      return innerFunction; // Return the inner function (closure)
+  }
+
+  var closure = outerFunction();
+  closure(); // Executes innerFunction with access to outerVar from the closure
+  ```
+
+### Key Difference:
+
+- **Scope chaining** is the mechanism that allows a function to access variables in its lexical scope chain, while **closures** are the result of a function having access to variables from its outer scope even after the outer function has finished executing.
+
+- **Closure is a concept that involves scope chaining but is not limited to it.** A closure is formed when a function retains access to variables from its outer scope, creating a closure even if it doesn't explicitly reference variables from the outer scope in its code.
+
+In summary, scope chaining is a mechanism, while closure is a result of that mechanism, indicating that a function maintains access to its outer scope's variables. Closures often involve scope chaining, but they are not synonymous.
+
+
+**1. Class and Inheritance in JavaScript:**
+
+**Class in JavaScript:**
+
+- **Definition:** A class is a blueprint for creating objects with a predefined structure and behavior. It encapsulates data (properties) and functions (methods) that operate on that data.
+
+- **Syntax:**
+  ```javascript
+  class ClassName {
+      constructor(parameters) {
+          // constructor code
+      }
+
+      method1() {
+          // method1 code
+      }
+
+      method2() {
+          // method2 code
+      }
+  }
+  ```
+
+- **Example:**
+  ```javascript
+  class Animal {
+      constructor(name) {
+          this.name = name;
+      }
+
+      speak() {
+          console.log(`${this.name} makes a sound.`);
+      }
+  }
+
+  const dog = new Animal('Dog');
+  dog.speak(); // Output: Dog makes a sound.
+  ```
+
+**Inheritance in JavaScript:**
+
+- **Definition:** Inheritance is a mechanism that allows a class (subclass/derived class) to inherit properties and methods from another class (superclass/base class).
+
+- **Syntax:**
+  ```javascript
+  class Subclass extends Superclass {
+      constructor(parameters) {
+          super(parameters); // Call the superclass constructor
+          // subclass constructor code
+      }
+
+      // additional methods specific to the subclass
+  }
+  ```
+
+- **Example:**
+  ```javascript
+  class Bird extends Animal {
+      constructor(name, wingspan) {
+          super(name); // Call the superclass constructor
+          this.wingspan = wingspan;
+      }
+
+      fly() {
+          console.log(`${this.name} is flying with a wingspan of ${this.wingspan} cm.`);
+      }
+  }
+
+  const eagle = new Bird('Eagle', 200);
+  eagle.speak(); // Output: Eagle makes a sound.
+  eagle.fly();   // Output: Eagle is flying with a wingspan of 200 cm.
+  ```
+
+**First-Class Functions:**
+
+In programming languages, a language is said to have first-class functions if functions are treated as first-class citizens. This means functions can be:
+
+1. Assigned to variables.
+2. Passed as arguments to other functions.
+3. Returned from other functions.
+
+**Example of First-Class Functions:**
+
+```javascript
+// Function assigned to a variable
+const greet = function(name) {
+    return `Hello, ${name}!`;
+};
+
+// Function passed as an argument to another function
+function processGreeting(greeterFunction, name) {
+    return greeterFunction(name);
+}
+
+// Function returned from another function
+function createGreeter(greeting) {
+    return function(name) {
+        return `${greeting}, ${name}!`;
+    };
+}
+
+// Using first-class functions
+const result1 = processGreeting(greet, "John");
+console.log(result1); // Output: Hello, John!
+
+const customGreeter = createGreeter("Hi");
+const result2 = customGreeter("Alice");
+console.log(result2); // Output: Hi, Alice!
+```
+
+**High-Order Functions:**
+
+A higher-order function is a function that takes one or more functions as arguments or returns a function as its result.
+
+**Example of High-Order Functions:**
+
+```javascript
+// Higher-order function taking a function as an argument
+function multiplier(factor) {
+    return function(number) {
+        return number * factor;
+    };
+}
+
+const double = multiplier(2);
+const triple = multiplier(3);
+
+console.log(double(5)); // Output: 10
+console.log(triple(5)); // Output: 15
+
+// Higher-order function returning a function
+function greeterFactory(greeting) {
+    return function(name) {
+        return `${greeting}, ${name}!`;
+    };
+}
+
+const sayHello = greeterFactory("Hello");
+const sayHi = greeterFactory("Hi");
+
+console.log(sayHello("Tom")); // Output: Hello, Tom!
+console.log(sayHi("Jerry"));  // Output: Hi, Jerry!
+```
+
+**Key Differences:**
+
+1. **First-Class Functions:**
+   - Refers to the treatment of functions as first-class citizens.
+   - Allows functions to be assigned to variables, passed as arguments, and returned from other functions.
+   - It's more about the characteristics of functions in a language.
+
+2. **High-Order Functions:**
+   - Refers to functions that operate on other functions by taking them as arguments or returning them.
+   - It's more about the behavior or capability of functions to operate on functions.
+
+```javascript
+function marker(func) {
+    return function(a, b) {
+        console.log("======");
+        func(a, b);
+        console.log("======");
+    };
+}
+function sum(a, b) {
+    console.log(a + b);
+}
+const wrap = marker(sum);
+wrap(2, 3); // Now you can call wrap, which in turn calls sum with the wrapping behavior
+```
+
+
+
+
+
+
 ## JavaScript Objects
 
 ### Definition
@@ -1243,8 +1635,6 @@ for (let key in person) {
 - They are used to group related data and functions together for better organization and ease of access.
 - Objects are versatile and flexible, making them suitable for a wide range of use cases.
 
-
-Certainly! JavaScript objects come with several built-in methods for various operations. Here's an explanation of some of the most commonly used object methods with examples:
 
 ### 1. `Object.keys(obj)`
 
@@ -1375,7 +1765,7 @@ console.log(laptop); // { brand: "Dell", model: "XPS" }
 
 These are just a few of the many methods and functionalities provided by JavaScript objects. Objects are powerful data structures that allow you to work with and manipulate data in a flexible and versatile way. Understanding these methods and how to use them is crucial for JavaScript development.
 
-Certainly! Here are some other important methods and functionalities provided by JavaScript objects:
+
 
 ### 9. `Object.getOwnPropertyNames(obj)`
 
@@ -1478,6 +1868,142 @@ console.log(values); // ["Isaac", 45, "Artist"]
 ```
 
 
+## call,apply,bind methods:
+
+- We are using these 3 methods to invoke the functions but the advantages are when we use these approaches then we dont have to define the object name as a parameter or we dont have to take the variable to access the object. 
+
+**`Normal method`**
+```javascript
+let obj = {
+   name:"Raj",
+   age:24
+}
+function demo(a){
+   console.log(a.name,a.age)
+}
+demo(obj)
+```
+
+**`After applying call`**
+
+```javascript
+let obj = {
+   name:"Raj",
+   age:24
+}
+function demo(){
+   console.log(this.name,this.age)
+}
+demo.call(obj)
+```
+```
+`this` keyword refers to the particular object.
+```
+
+### Differences between call,apply,bind:
+
+- call : In case of call each and every argument which is required to passed to the function will be passed individually. 
+
+
+```javascript
+let obj = {
+   name:"Raj",
+   age:24
+}
+function demo(company,jobrole){
+   console.log(this.name,this.age,company,jobrole)
+}
+demo.call(obj,"Google","Developer")
+```
+- apply :  In case of call each and every argument which is required to passed to the function will be passed inside an array.
+
+```javascript
+let obj = {
+   name:"Raj",
+   age:24
+}
+function demo(company,jobrole){
+   console.log(this.name,this.age,company,jobrole)
+}
+demo.apply(obj,["Google","Developer"])
+```
+- bind : It will return a new function and this new function can use anytime , anywhere. 
+
+```javascript
+let obj = {
+   name:"Raj",
+   age:24
+}
+function demo(company,jobrole){
+   console.log(this.name,this.age,company,jobrole)
+}
+const value = demo.bind(obj)
+value("Google","Developer");
+```
+
+### How to render elements from an array of objects.
+
+To render elements from an array of objects in JavaScript, you can use a loop (such as `forEach`) to iterate over the array and create HTML elements dynamically based on the data in each object. Additionally, you can then append these elements to the DOM. Here's an example using plain JavaScript:
+
+```javascript
+const people = [
+  { id: 1, name: 'John', age: 25 },
+  { id: 2, name: 'Jane', age: 30 },
+  { id: 3, name: 'Bob', age: 22 }
+];
+```
+
+And you want to render a list of `<div>` elements, each containing information about a person. You might want to display their name and age. Here's how you can do it:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render Elements from Array of Objects</title>
+  <style>
+    /* Optional: Add some basic styling */
+    .person {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- The container where we will render the elements -->
+<div id="peopleContainer"></div>
+
+<script>
+  // Your array of objects
+  const people = [
+    { id: 1, name: 'John', age: 25 },
+    { id: 2, name: 'Jane', age: 30 },
+    { id: 3, name: 'Bob', age: 22 }
+  ];
+
+  // Get the container element
+  const container = document.getElementById('peopleContainer');
+
+  // Loop through the array and create HTML elements
+  people.forEach(person => {
+    // Create a <div> element for each person
+    const personDiv = document.createElement('div');
+    personDiv.classList.add('person');
+
+    // Add content to the <div> based on the person object
+    personDiv.innerHTML = `<strong>Name:</strong> ${person.name}, <strong>Age:</strong> ${person.age}`;
+
+    // Append the <div> to the container
+    container.appendChild(personDiv);
+  });
+</script>
+
+</body>
+</html>
+```
 
 
 ## JavaScript Set
@@ -1628,8 +2154,6 @@ Here are some important methods and properties of Sets:
 ```
 
 You can save the above content in a `.md` file and render it to view as a Markdown document.
-
-
 
 
 
