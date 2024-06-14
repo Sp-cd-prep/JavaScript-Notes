@@ -1135,6 +1135,235 @@ let words = sentence.split(","); // ["I", "am", "a", "comma", "separated", "sent
 ```
 
 
+
+### Types of Functions in JavaScript
+
+JavaScript supports various types of functions, each with its own syntax and use cases. Understanding these functions is essential for writing effective JavaScript code. Here is a detailed explanation of each type:
+
+### 1. Regular Function
+
+**Definition:** Regular functions are the most common type of functions in JavaScript. They are defined using the `function` keyword.
+
+**Syntax:**
+```javascript
+function functionName(parameters) {
+    // function body
+}
+```
+
+**Example:**
+```javascript
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+console.log(greet("Alice")); // Hello, Alice!
+```
+
+**Use Cases:** Regular functions are used for most function definitions, including event handlers, methods in objects, and general-purpose functions.
+
+### 2. Arrow Function
+
+**Definition:** Arrow functions provide a shorter syntax for writing functions. They do not have their own `this` context; instead, they inherit `this` from the parent scope.
+
+**Syntax:**
+```javascript
+const functionName = (parameters) => {
+    // function body
+};
+```
+
+**Example:**
+```javascript
+const greet = (name) => `Hello, ${name}!`;
+
+console.log(greet("Bob")); // Hello, Bob!
+```
+
+**Use Cases:** Arrow functions are often used for concise function expressions, especially for callbacks and functional programming.
+
+**Difference between Regular Function and Arrow Function:**
+- **Syntax:** Arrow functions have a more concise syntax.
+- **`this` Binding:** Arrow functions do not have their own `this`; they inherit `this` from the parent scope, whereas regular functions have their own `this`.
+- **Usage:** Arrow functions are preferred in scenarios where `this` should not change, such as callbacks and functional programming.
+
+### 3. Anonymous Function
+
+**Definition:** Anonymous functions are functions without a name. They are often used as arguments to other functions or assigned to variables.
+
+**Syntax:**
+```javascript
+function(parameter) {
+    // function body
+}
+```
+
+**Example:**
+```javascript
+setTimeout(function() {
+    console.log("Hello, world!");
+}, 1000);
+```
+
+**Use Cases:** Anonymous functions are commonly used as callbacks, event handlers, or immediate invocations.
+
+### 4. Function Expression
+
+**Definition:** Function expressions involve defining a function and assigning it to a variable. They can be named or anonymous.
+
+**Syntax:**
+```javascript
+const functionName = function(parameters) {
+    // function body
+};
+```
+
+**Example:**
+```javascript
+const greet = function(name) {
+    return `Hello, ${name}!`;
+};
+
+console.log(greet("Charlie")); // Hello, Charlie!
+```
+
+**Use Cases:** Function expressions are used when a function needs to be assigned to a variable, passed as an argument, or returned from another function.
+
+### 5. Callback Function
+
+**Definition:** A callback function is a function passed as an argument to another function and is executed after some operation has been completed.
+
+**Syntax:**
+```javascript
+function callback() {
+    // function body
+}
+
+function mainFunction(callback) {
+    // execute callback
+    callback();
+}
+```
+
+**Example:**
+```javascript
+function logMessage() {
+    console.log("This is a callback function.");
+}
+
+function executeCallback(callback) {
+    callback();
+}
+
+executeCallback(logMessage);
+```
+
+**Use Cases:** Callback functions are widely used in asynchronous programming, event handling, and functional programming.
+
+### 6. First-Class Function
+
+**Definition:** JavaScript treats functions as first-class citizens, meaning they can be assigned to variables, passed as arguments, and returned from other functions.
+
+**Example:**
+```javascript
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+const sayHello = greet;
+console.log(sayHello("Dave")); // Hello, Dave!
+```
+
+**Use Cases:** This property of functions allows for higher-order functions, functional programming, and creating flexible APIs.
+
+### 7. Higher-Order Function
+
+**Definition:** A higher-order function is a function that accepts other functions as arguments or returns a function.
+
+**Syntax:**
+```javascript
+function higherOrderFunction(callback) {
+    // function body
+}
+```
+
+**Example:**
+```javascript
+function higherOrderFunction(callback) {
+    callback();
+}
+
+function logMessage() {
+    console.log("This is a higher-order function.");
+}
+
+higherOrderFunction(logMessage);
+```
+
+**Use Cases:** Higher-order functions are used in functional programming, array methods like `map`, `filter`, and `reduce`.
+
+### 8. Self-Invoking Function (IIFE)
+
+**Definition:** A self-invoking function, also known as an Immediately Invoked Function Expression (IIFE), is a function that is executed immediately after it is defined.
+
+**Syntax:**
+```javascript
+(function() {
+    // function body
+})();
+```
+
+**Example:**
+```javascript
+(function() {
+    console.log("This is an IIFE.");
+})();
+```
+
+**Use Cases:** IIFEs are used to create a local scope and avoid polluting the global namespace.
+
+**Difference between Regular Function and Self-Invoking Function:**
+- **Invocation:** Regular functions are invoked explicitly, while self-invoking functions are executed immediately.
+- **Scope:** Self-invoking functions create a local scope immediately upon execution.
+
+### Detailed Examples
+
+#### Regular Function vs. Arrow Function
+
+```javascript
+const person = {
+    name: "Alice",
+    regularFunction: function() {
+        console.log(this.name); // Alice
+    },
+    arrowFunction: () => {
+        console.log(this.name); // undefined (inherits `this` from the global scope)
+    }
+};
+
+person.regularFunction();
+person.arrowFunction();
+```
+
+#### Regular Function vs. Self-Invoking Function
+
+```javascript
+// Regular Function
+function regularFunction() {
+    console.log("This is a regular function.");
+}
+
+regularFunction(); // This is a regular function.
+
+// Self-Invoking Function (IIFE)
+(function() {
+    console.log("This is an IIFE.");
+})(); // This is an IIFE.
+```
+
+
+
+
 ### 1. Different Scopes in JavaScript:
 
 **Definition:** Scope refers to the context in which variables are declared and accessed. In JavaScript, there are two main types of scope:
@@ -1359,10 +1588,8 @@ Scope chaining and closures are related concepts in JavaScript, but they are not
 
 - **Closure is a concept that involves scope chaining but is not limited to it.** A closure is formed when a function retains access to variables from its outer scope, creating a closure even if it doesn't explicitly reference variables from the outer scope in its code.
 
-In summary, scope chaining is a mechanism, while closure is a result of that mechanism, indicating that a function maintains access to its outer scope's variables. Closures often involve scope chaining, but they are not synonymous.
 
-
-**1. Class and Inheritance in JavaScript:**
+## 1. Class and Inheritance in JavaScript:
 
 **Class in JavaScript:**
 
@@ -2148,9 +2375,6 @@ Here are some important methods and properties of Sets:
 - `values()`: Return an Iterator with all the values present in the Set.
 - `size`: Property to check the number of elements in the Set.
 ```
-
-You can save the above content in a `.md` file and render it to view as a Markdown document.
-
 
 
 ### Common Set Methods
