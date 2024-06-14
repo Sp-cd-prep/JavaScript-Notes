@@ -1533,10 +1533,6 @@ wrap(2, 3); // Now you can call wrap, which in turn calls sum with the wrapping 
 ```
 
 
-
-
-
-
 ## JavaScript Objects
 
 ### Definition
