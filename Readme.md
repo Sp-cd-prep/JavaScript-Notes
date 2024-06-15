@@ -1774,12 +1774,21 @@ wrap(2, 3); // Now you can call wrap, which in turn calls sum with the wrapping 
 
 **Example:**
 ```javascript
-let person = {
-    name: "John",
-    age: 30,
-    isStudent: false,
+let user = {     // an object
+  name: "John",  // by key "name" store value "John"
+  age: 30        // by key "age" store value 30
 };
 ```
+
+A property has a key (also known as “name” or “identifier”) before the colon ":" and a value to the right of it.
+
+In the user object, there are two properties:
+
+The first property has the name "name" and the value "John".
+The second one has the name "age" and the value 30.
+
+console.log(user.name)//John
+
 
 ### Why Use Objects
 
@@ -2166,67 +2175,111 @@ value("Google","Developer");
 
 ### How to render elements from an array of objects.
 
-To render elements from an array of objects in JavaScript, you can use a loop (such as `forEach`) to iterate over the array and create HTML elements dynamically based on the data in each object. Additionally, you can then append these elements to the DOM. Here's an example using plain JavaScript:
+An array of objects in JavaScript is a collection where each item is an object. This structure is particularly useful for handling a list of records where each record has the same set of properties. Here’s an example:
 
 ```javascript
-const people = [
-  { id: 1, name: 'John', age: 25 },
-  { id: 2, name: 'Jane', age: 30 },
-  { id: 3, name: 'Bob', age: 22 }
+let users = [
+  { name: "Alice", age: 25, city: "New York" },
+  { name: "Bob", age: 30, city: "San Francisco" },
+  { name: "Charlie", age: 35, city: "Chicago" }
 ];
 ```
 
-And you want to render a list of `<div>` elements, each containing information about a person. You might want to display their name and age. Here's how you can do it:
+In this example, `users` is an array containing three objects. Each object represents a user with properties `name`, `age`, and `city`.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Render Elements from Array of Objects</title>
-  <style>
-    /* Optional: Add some basic styling */
-    .person {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 5px;
-    }
-  </style>
-</head>
-<body>
+### Examples of Simple Logic Building Questions
 
-<!-- The container where we will render the elements -->
-<div id="peopleContainer"></div>
+1. **Find a user by name**:
+   Write a function to find a user by their name from the array of objects.
 
-<script>
-  // Your array of objects
-  const people = [
-    { id: 1, name: 'John', age: 25 },
-    { id: 2, name: 'Jane', age: 30 },
-    { id: 3, name: 'Bob', age: 22 }
-  ];
+   ```javascript
+   function findUserByName(users, name) {
+     return users.find(user => user.name === name);
+   }
 
-  // Get the container element
-  const container = document.getElementById('peopleContainer');
+   console.log(findUserByName(users, "Bob"));
+   // Output: { name: 'Bob', age: 30, city: 'San Francisco' }
+   ```
 
-  // Loop through the array and create HTML elements
-  people.forEach(person => {
-    // Create a <div> element for each person
-    const personDiv = document.createElement('div');
-    personDiv.classList.add('person');
+2. **Filter users by age**:
+   Write a function to get all users above a certain age.
 
-    // Add content to the <div> based on the person object
-    personDiv.innerHTML = `<strong>Name:</strong> ${person.name}, <strong>Age:</strong> ${person.age}`;
+   ```javascript
+   function filterUsersByAge(users, minAge) {
+     return users.filter(user => user.age > minAge);
+   }
 
-    // Append the <div> to the container
-    container.appendChild(personDiv);
-  });
-</script>
+   console.log(filterUsersByAge(users, 28));
+   // Output: [{ name: 'Bob', age: 30, city: 'San Francisco' }, { name: 'Charlie', age: 35, city: 'Chicago' }]
+   ```
 
-</body>
-</html>
-```
+3. **Sort users by age**:
+   Write a function to sort the users by age in ascending order.
+
+   ```javascript
+   function sortUsersByAge(users) {
+     return users.sort((a, b) => a.age - b.age);
+   }
+
+   console.log(sortUsersByAge(users));
+   // Output: [{ name: 'Alice', age: 25, city: 'New York' }, { name: 'Bob', age: 30, city: 'San Francisco' }, { name: 'Charlie', age: 35, city: 'Chicago' }]
+   ```
+
+4. **Get a list of cities**:
+   Write a function to extract the list of cities from the array of users.
+
+   ```javascript
+   function getCities(users) {
+     return users.map(user => user.city);
+   }
+
+   console.log(getCities(users));
+   // Output: ['New York', 'San Francisco', 'Chicago']
+   ```
+
+5. **Calculate the average age**:
+   Write a function to calculate the average age of the users.
+
+   ```javascript
+   function calculateAverageAge(users) {
+     const totalAge = users.reduce((sum, user) => sum + user.age, 0);
+     return totalAge / users.length;
+   }
+
+   console.log(calculateAverageAge(users));
+   // Output: 30
+   ```
+
+6. **Add a new user**:
+   Write a function to add a new user to the array.
+
+   ```javascript
+   function addUser(users, newUser) {
+     users.push(newUser);
+     return users;
+   }
+
+   let newUser = { name: "Dave", age: 28, city: "Los Angeles" };
+   console.log(addUser(users, newUser));
+   // Output: Updated array with the new user added
+   ```
+
+7. **Update a user’s age**:
+   Write a function to update the age of a user given their name.
+
+   ```javascript
+   function updateUserAge(users, name, newAge) {
+     let user = users.find(user => user.name === name);
+     if (user) {
+       user.age = newAge;
+     }
+     return users;
+   }
+
+   console.log(updateUserAge(users, "Alice", 26));
+   // Output: Updated array with Alice's age updated to 26
+   ```
+
 
 
 ## JavaScript Set
